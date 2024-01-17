@@ -1,0 +1,59 @@
+<div class="p-4 m-auto surface-100 shadow-2 border-round lg:w-6">
+  <div class="text-center mb-5">
+    <i class="pi pi-table" class="text-xl"></i>
+    <div class="text-900 text-3xl font-medium mb-3">Update Account Details</div>
+  </div>
+
+  <form [formGroup]="form">
+    <app-input
+      [control]="form.controls['email']"
+      [icon]="'at'"
+      [placeholder]="'Enter E-mail'"
+    ></app-input>
+    <app-input
+      [control]="form.controls['firstName']"
+      [placeholder]="'Enter first name'"
+    ></app-input>
+    <app-input
+      [control]="form.controls['lastName']"
+      [placeholder]="'Enter last name'"
+    ></app-input>
+
+    <app-input
+      [control]="form.controls['dateOfBirth']"
+      [icon]="'calendar'"
+      [placeholder]="'Enter date of birth'"
+      [type]="'date'"
+    ></app-input>
+
+    <app-input
+      [control]="form.controls['newPassword']"
+      [icon]="'key'"
+      [placeholder]="'Change Password'"
+      [type]="'password'"
+    ></app-input>
+
+    <app-input
+      [control]="form.controls['oldPassword']"
+      [icon]="'key'"
+      [placeholder]="'Confirm password'"
+      [type]="'password'"
+    ></app-input>
+
+    <app-upload-image
+      [multi]="true"
+      [existingImages]="oldImage? [oldImage] : null"
+      [placeholder]="'Add Images'"
+      (newImages)="newImages($event)"
+      (oldImages)="updateExisting()"
+    ></app-upload-image>
+    <p-button
+      pRipple
+      (click)="onSubmit()"
+      [disabled]="form.invalid"
+      label="Save changes"
+      class="w-full"
+    ></p-button>
+  </form>
+</div>
+<p-toast></p-toast>

@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+  <input
+    (click)="clicked()"
+    type="search"
+    pInputText
+    formControlName="searchTerm"
+    placeholder="Find User"
+    class="w-full"
+  />
+</form>
+
+<div *ngIf="users$ | async as users">
+  <p-dataView #dv [value]="users" *ngIf="!hidden">
+    <ng-template pTemplate="list" let-users>
+      <div class="z-5 absolute surface-0 col-12 pb-8">
+        @for (item of users; track $index) {
+        <div (click)="form.reset()">
+          <app-profile-header
+            [user]="item"
+            [iconSize]="'normal'"
+            [textSize]="'sm'"
+            [showButton]="false"
+          ></app-profile-header>
+        </div>
+        }
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>

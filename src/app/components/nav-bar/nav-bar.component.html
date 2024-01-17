@@ -1,0 +1,23 @@
+<div class="p-7 pt-4 flex justify-content-between">
+  <div class="flex gap-3">
+  <a [routerLink]="(isLoggedIn$ | async )?['/feed']: ['/']">
+    <i class="pi pi-slack text-5xl"></i>
+  </a>
+  <p-toggleButton
+    [(ngModel)]="!isDark"
+    (click)="setTheme()"
+    [onLabel]="'Light Mode'"
+    offLabel="Dark Mode"
+    [onIcon]="'pi pi-sun'"
+    offIcon="pi pi-moon"
+    [style]="{ width: '10em' }"
+  ></p-toggleButton>
+</div>
+
+    @if((isLoggedIn$ | async)){ 
+      <app-search></app-search> 
+      <app-icons-bar [userId]="(user$ | async)?.id!"></app-icons-bar>
+    } @else {
+      <app-icons-bar [userId]="null"></app-icons-bar>
+    }
+</div>

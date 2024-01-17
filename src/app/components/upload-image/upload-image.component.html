@@ -1,0 +1,27 @@
+<p-fileUpload
+mode="basic"
+name="images[]"
+[chooseLabel]="placeholder"
+url="https://www.primefaces.org/cdn/api/upload.php"
+(onUpload)="onUpload($event)"
+class="m-2 m-auto text-center mb-4"
+[multiple]="multi"
+accept="image/*"
+>
+</p-fileUpload>  
+<ul *ngIf="images.length">
+    <li *ngFor="let file of images">
+      <span (click)="removeImage(file)">
+        {{ file.name }} - {{ file.size }} bytes
+      </span>
+    </li>
+  </ul>
+  <ul *ngIf="existingImages && existingImages.length">
+    <li *ngFor="let file of existingImages">
+      <img
+        [src]="file | image"
+        [height]="40"
+        (click)="removeImage(file)"
+      />
+    </li>
+  </ul>

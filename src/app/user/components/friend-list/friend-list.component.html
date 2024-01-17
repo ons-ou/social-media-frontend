@@ -1,0 +1,14 @@
+<p-dataView #dv [value]="(friends$ | async)?? []">
+  <ng-template pTemplate="list" let-friends>
+    <div class="flex flex-col m-3 gap-4 justify-content-center">
+      @for (item of friends; track $index) {
+      <div class="col-8 shadow-5">
+        <app-profile-header
+          [user]="item"
+          [showButton]="!item.isOwner"
+        ></app-profile-header>
+      </div>
+      }
+    </div>
+  </ng-template>
+</p-dataView>

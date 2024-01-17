@@ -1,0 +1,28 @@
+<div class="flex flex-column">
+  <div class="flex flex-row gap-2">
+    <input pInputText [(ngModel)]="comment" />
+    <button pButton [disabled]="comment === ''" (click)="addComment()">
+      Post
+    </button>
+  </div>
+  @for (item of comments; track $index) {
+  <div class="flex flex-row gap-2">
+    <p-avatar
+      styleClass="mr-2"
+      size="normal"
+      [image]="item.user.profilePicture | image"
+      [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
+      shape="circle"
+    ></p-avatar>
+
+    <div class="card shadow-2 col-12 m-1">
+      <h5 class="m-0">{{ item.user.firstName }} {{ item.user.lastName }}</h5>
+      <div class="text-xs m-0">
+        Posted on {{ item.createdAt | date : "short" }}
+      </div>
+      <div>{{ item.content }}</div>
+    </div>
+  </div>
+  }
+
+</div>

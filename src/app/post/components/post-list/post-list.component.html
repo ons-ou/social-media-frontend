@@ -1,0 +1,29 @@
+<p-dataView #dv *ngIf="(posts$ | async) as posts" [value]="posts">
+  <ng-template pTemplate="list" let-posts>
+    <div class="z-0 grid grid-nogutter m-3">
+      <div *ngFor="let item of posts; let i = index" class="col-12 shadow-5">
+        <app-post-item
+          (delete) ="delete($event)"
+          [post]="item"
+        ></app-post-item>
+      </div>
+    </div>
+  </ng-template>
+</p-dataView>
+
+<ng-container *ngIf="isLoading">
+  <app-post-skeleton></app-post-skeleton>
+  <app-post-skeleton></app-post-skeleton>
+</ng-container>
+
+<ng-container *ngIf="!pageNumberSubject.isStopped">
+  <p-button
+    class="m-7 text-center"
+    [label]="'Show More'"
+    (click)="showMore()"
+  ></p-button>
+  <div class="h-10rem"></div>
+</ng-container>
+
+  
+<p-toast></p-toast>

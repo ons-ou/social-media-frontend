@@ -1,0 +1,104 @@
+<div
+  class="flex flex-column p-4 gap-4 col-12"
+>
+<div *ngIf="(post$ | customizePost | async) as p">
+  @if (p.isOwner) {
+  <div class="align-content-end text-right">
+    <a [routerLink]="['/posts/update', p.id]">
+      <p-button
+        icon="pi pi-pencil text-lg cursor-pointer pr-2"
+        [text]="true"
+      ></p-button>
+    </a>
+    <p-confirmPopup></p-confirmPopup>
+    <p-button
+      (click)="deletePost($event)"
+      icon="pi pi-trash text-lg cursor-pointer"
+    ></p-button>
+  </div>
+  }
+  <div class="flex flex-row">
+    <a [routerLink]="['/profile/']" [queryParams]="{ id: p.user?.id }">
+      <p-avatar
+        [image]="p.user?.profilePicture | image"
+        styleClass="mr-2"
+        size="large"
+        [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
+        shape="circle"
+      ></p-avatar>
+    </a>
+    <div class="flex flex-column gap-0">
+      <h3 class="m-0">{{ p.user?.firstName }} {{ p.user?.lastName }}</h3>
+      <p class="text-sm m-0">
+        posted on {{ p.createdAt | date : "short" }}
+        @if (p.createdAt !== p.updatedAt) {
+        <span class="text-sm m-0">
+          , Last updated {{ p.updatedAt | date : "short" }}
+        </span>
+        }
+      </p>
+      <span>
+        visibility:
+        <i [class]="p.viewedByAll ? 'pi pi-globe' : 'pi pi-users'"></i>
+      </span>
+    </div>
+  </div>
+  @if (p.images) {
+  <div class="card">
+    <p-carousel [value]="p.images" [numVisible]="1">
+      <ng-template pTemplate="item" let-item>
+        <div class="surface-border border-round m-2 text-center py-5 px-3">
+          <img [src]="item | image" style="height: 300px" />
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+  }
+  <div
+    class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4"
+  >
+    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+      <div class="text-md text-900">{{ p.content }}</div>
+      <div class="flex align-items-center gap-3">
+        @for (tag of p.tags; track $index) {
+        <p-tag
+          [value]="tag.content"
+          [severity]="severities[$index % severities.length]"
+        ></p-tag>
+        }
+      </div>
+      <p-divider class="w-30rem"></p-divider>
+      <div class="flex flex-row gap-3">
+        <i
+          (click)="likeSubject.next(null)"
+          [class]="
+            'cursor-pointer text-lg' +
+            (p.isLiked ? ' pi pi-heart-fill' : ' pi pi-heart')
+          "
+        ></i>
+        {{ p.likedBy.length }}
+
+        <i
+          (click)="shareSubject.next(null)"
+          [class]="
+            'cursor-pointer text-lg pi pi-share-alt ' +
+            (p.isShared && 'text-blue-500')
+          "
+        ></i>
+        {{ p.sharedBy.length }}
+        <i
+          (click)="showComments()"
+          class="text-lg pi pi-comment cursor-pointer"
+        ></i>
+        {{ p.comment?.length ?? 0 }}
+      </div>
+      @if(isShown){
+      <app-post-comments
+        [comments]="p.comments"
+        (updateComments)="comment($event)"
+      ></app-post-comments>
+      }
+    </div>
+  </div>
+</div>
+</div>

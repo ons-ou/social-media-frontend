@@ -1,0 +1,5 @@
+@import "primeng/resources/themes/lara-dark-teal/theme.css";
+
+body {
+    background-color: var(--surface-50);
+}

@@ -1,0 +1,23 @@
+<div *ngIf="user" class="flex flex-row justify-content-between gap-3 m-4">
+  <div class="flex flex-row gap-3 p-2">
+    <a [routerLink]="['/profile']" [queryParams]="{ id: user.id }">
+      <p-avatar
+        [size]="iconSize"
+        shape="circle"
+        [image]="user.profilePicture | image"
+      ></p-avatar>
+    </a>
+    <h2 [class]="'text-' + textSize + ' font-medium'">
+      {{ user.firstName }} {{ user.lastName }}
+    </h2>
+  </div>
+  @if(showButton){
+  <app-profile-button
+    [id]="user.id"
+    [state]="user.state"
+    [name]="user.firstName + ' ' + user.lastName"
+    [requestId]="user.friendRequestId"
+    (updateItems)="update($event)"
+  ></app-profile-button>
+  }
+</div>

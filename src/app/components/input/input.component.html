@@ -1,0 +1,22 @@
+<div class="mb-4">
+  <p-inputGroup>
+    @if (icon) {
+    <p-inputGroupAddon>
+      <i [class]="'pi pi-' + icon"></i>
+    </p-inputGroupAddon>
+    }
+    <input
+      pInputText
+      [formControl]="control"
+      [placeholder]="placeholder"
+      [type]="type ? type : 'text'"
+      [value]="val && val"
+    />
+  </p-inputGroup>
+  <div
+    *ngIf="errorMessage$ | async as msg"
+    class="text-sm font-semibold text-red-500 block mt-1"
+  >
+    {{ msg }}
+  </div>
+</div>

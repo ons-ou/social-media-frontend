@@ -1,0 +1,16 @@
+<div class="p-4 m-auto surface-100 shadow-2 border-round lg:w-6">
+    <div class="text-center mb-5">
+        <i class="pi pi-table" class="text-xl"></i>
+        <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+        <span class="text-600 font-medium line-height-3">Don't have an account?</span>
+        <a [routerLink]="['/sign-up']" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
+    </div>
+
+    <form [formGroup]="loginForm">
+        <app-input [control]="loginForm.controls.username" [icon]="'user'" [placeholder]="'Enter username'"></app-input>
+        <app-input [control]="loginForm.controls.password" [icon]="'key'" [placeholder]="'Enter password'" [type]="'password'"></app-input>
+
+        <p-button pRipple [disabled]="loginForm.invalid" label="Sign in" class="w-full" (click)="login()"></p-button>
+    </form>
+</div>
+<p-toast></p-toast>

@@ -1,0 +1,66 @@
+<div class="p-4 m-auto surface-100 shadow-2 border-round lg:w-6">
+  <div class="text-center mb-5">
+    <i class="pi pi-table" class="text-xl"></i>
+    <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+    <span class="text-600 font-medium line-height-3"
+      >Already have an account?</span
+    >
+    <a
+      [routerLink]="['/login']"
+      class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+      >Sign in!</a
+    >
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-input
+      [control]="form.get('email')"
+      [icon]="'at'"
+      [placeholder]="'Enter E-mail'"
+    ></app-input>
+    <app-input
+      [control]="form.get('firstName')"
+      [placeholder]="'Enter first name'"
+    ></app-input>
+    <app-input
+      [control]="form.get('lastName')"
+      [placeholder]="'Enter last name'"
+    ></app-input>
+
+    <app-input
+      [control]="form.get('username')"
+      [icon]="'user'"
+      [val]="username$ | async"
+      [placeholder]="'Enter username'"
+    ></app-input>
+
+    <app-input
+      [control]="form.get('dateOfBirth')"
+      [icon]="'calendar'"
+      [placeholder]="'Enter date of birth'"
+      [type]="'date'"
+    ></app-input>
+
+    <app-input
+      [control]="form.get('password')"
+      [icon]="'key'"
+      [placeholder]="'Enter password'"
+      [type]="'password'"
+    ></app-input>
+
+    <app-upload-image
+      [multi]="false"
+      [placeholder]="'Add Profile Picture'"
+      (newImages) ="updatePicture($event)" 
+    ></app-upload-image>
+    <p-button
+      pRipple
+      type="submit"
+      label="Sign Up"
+      class="w-full"
+    ></p-button>
+  </form>
+</div>
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+

@@ -1,0 +1,46 @@
+@if (form) {
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="w-9 lg:w-7 min-h-30rem m-auto shadow-2 surface-100"
+>
+  <div class="text-800 font-bold text-4xl text-center py-4">
+    <p>{{ text }} Post</p>
+  </div>
+  <div class="text-center py-5 flex flex-column gap-3">
+    <span class="p-float-label">
+      <textarea
+        id="float-input"
+        rows="5"
+        cols="30"
+        pInputTextarea
+        formControlName="content"
+      ></textarea>
+      <label for="float-input">Post Content</label>
+    </span>
+
+    <span class="p-float-label">
+      <label for="viewedByAll">Public Post</label>
+      <p-checkbox formControlName="viewedByAll" [binary]="true" inputId="binary"></p-checkbox>
+    </span>
+
+    
+    <span class="p-float-label">
+      <p-chips formControlName="tags"></p-chips>
+      <label for="tags">Add Tags</label>
+    </span>
+
+  
+    <app-upload-image
+    [multi]="true"
+    [existingImages]="existingImages"
+    [placeholder]="'Add Images'"
+    (newImages)="newImages($event)"
+    (oldImages)="updateExisting($event)"></app-upload-image>
+   
+    <p-button type="submit" [disabled]="!form.valid"> Save </p-button>
+  </div>
+</form>
+}
+
+<p-confirmDialog></p-confirmDialog>
