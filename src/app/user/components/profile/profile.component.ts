@@ -37,6 +37,7 @@ export class ProfileComponent {
     this.user$ = merge(
       this.route.data.pipe(
         map((data) => {
+          console.log(data['user'])
           return data['user'];
         })
       ),

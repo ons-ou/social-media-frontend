@@ -2,7 +2,7 @@
   <app-profile-header
     [user]="user"
     (updateItems)="updateItems($event)"
-    [showButton]="(user.isAdmin && !user.isOwner)? false: true"
+    [showButton]="(user.state == 'ADMIN')? false: true"
   ></app-profile-header>
   <p-menubar [model]="(items$ | async) ?? []"></p-menubar>
   <router-outlet></router-outlet>

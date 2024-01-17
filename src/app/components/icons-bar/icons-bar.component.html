@@ -1,54 +1,54 @@
 @if (userId != null){
 <div class="flex">
-  <div *ngIf="(authUser$ | async).role != 'MODERATOR'" class="flex">
-    <a
-      *ngIf="admin$ | async as admin"
-      [routerLink]="['/profile/posts']"
-      [queryParams]="{ id: admin.id }"
-    >
-      @if(admin.count == 0){
-      <p-button
-        icon="pi pi-bell"
-        [rounded]="true"
-        severity="secondary"
-        [text]="true"
-      ></p-button>
-      } @else {
-      <p-button
-        icon="pi pi-bell"
-        [rounded]="true"
-        severity="secondary"
-        (click)="reset()"
-        [badge]="admin.count.toString()"
-        [text]="true"
-        badgeClass="p-badge-danger"
-      ></p-button>
-      }
-    </a>
-    <a
-      *ngIf="count$ | async as count"
-      [routerLink]="['/profile/received-requests']"
-      [queryParams]="{ id: userId }"
-    >
-      @if (count=="0") {
-      <p-button
-        icon="pi pi-user-plus"
-        [text]="true"
-        [rounded]="true"
-        severity="info"
-      ></p-button
-      >} @else {
-      <p-button
-        icon="pi pi-user-plus"
-        [rounded]="true"
-        severity="info"
-        [badge]="count"
-        [text]="true"
-        badgeClass="p-badge-danger"
-      ></p-button>
-      }
-    </a>
-  </div>
+  <div *ngIf="(authUser$ |async).role != 'MODERATOR'" class="flex">
+  <a
+    *ngIf="admin$ | async as admin"
+    [routerLink]="['/profile/posts']"
+    [queryParams]="{ id: admin.id }"
+  >
+    @if(admin.count == 0){
+    <p-button
+      icon="pi pi-bell"
+      [rounded]="true"
+      severity="secondary"
+      [text]="true"
+    ></p-button>
+    } @else {
+    <p-button
+      icon="pi pi-bell"
+      [rounded]="true"
+      severity="secondary"
+      (click)="reset()"
+      [badge]="admin.count.toString()"
+      [text]="true"
+      badgeClass="p-badge-danger"
+    ></p-button>
+    }
+  </a>
+  <a
+    *ngIf="(count$ | async) as count"
+    [routerLink]="['/profile/received-requests']"
+    [queryParams]="{ id: userId }"
+  >
+    @if (count=="0") {
+    <p-button
+      icon="pi pi-user-plus"
+      [text]="true"
+      [rounded]="true"
+      severity="info"
+    ></p-button
+    >} @else {
+    <p-button
+      icon="pi pi-user-plus"
+      [rounded]="true"
+      severity="info"
+      [badge]="count"
+      [text]="true"
+      badgeClass="p-badge-danger"
+    ></p-button>
+    }
+  </a>
+</div>
   <a [routerLink]="['/posts/add']">
     <p-button
       icon="pi pi-pencil"

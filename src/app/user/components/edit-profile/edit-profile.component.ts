@@ -84,13 +84,12 @@ export class EditProfileComponent {
     formData.append('profilePicture', this.profileImage);
     formData.append('oldImage', this.oldImage);
 
-    this.form.reset();
-
     this.authService
       .updateAccount(formData)
       .pipe(
         tap(() => {
           this.router.navigate(['/feed'])
+          this.form.reset();
         }),
         catchError((err) => {
           this.messageService.add({

@@ -45,11 +45,10 @@ export class PostService {
     );
   }
 
-  countLatestPosts(userId: string, date: Date): Observable<number> {
+  countLatestPosts(userId: string, date: string): Observable<number> {
     const url = `${this.apiUrl}/${userId}/count`;
-    console.log(date)
     const params = new HttpParams()
-      .set('date', new Date(date).toLocaleString());
+      .set('date', date);
 
     return this.http.get<{message: string}>(url, { params }).pipe(
       map((res)=> +res.message)

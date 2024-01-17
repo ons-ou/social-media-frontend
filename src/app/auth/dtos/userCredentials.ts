@@ -4,6 +4,6 @@ export class UserCredentials {
     public username: string,
     public role: string,
     public token: string, 
-    public logIn: Date
+    public logIn: string
     ) {}
 }
